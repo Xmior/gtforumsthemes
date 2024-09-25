@@ -1,19 +1,14 @@
 {
     "manifest_version": 3,
-    "name": "Theme Changer",
+    "name": "Caferius' Growtopia Forums Theme Changer",
     "version": "1.0",
-    "description": "Change themes for growtopiagame.com/forums",
+    "description": "Change themes for growtopiagame.com/forums, by Caferius",
     "permissions": [
         "storage",
         "activeTab"
     ],
     "action": {
         "default_popup": "popup.html",
-        "default_icon": {
-            "16": "icon16.png",
-            "48": "icon48.png",
-            "128": "icon128.png"
-        }
     },
     "content_scripts": [
         {
