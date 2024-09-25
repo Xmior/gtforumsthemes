@@ -1,5 +1,7 @@
 themes.zip includes most of the weather renders for website with undone theme.css
 
+I gave up coding this project bcs I'm soooooo noob for that. Feel free to try make it work!
+
 How is that code works
 
 Popup UI (popup.html):
