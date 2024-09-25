@@ -1,4 +1,4 @@
-// Temalar burada listelenir
+// Get the theme files from themes.zip, theme.css of the weathers are not done.
 const themes = [
   { name: "Sunny", image: "/themes/sunny/weather_sunny.png" },
   { name: "Night", image: "/themes/night/weather_night.png" },
@@ -53,20 +53,18 @@ const themes = [
 
 let selectedTheme = null;
 
-// Tema listesini doldur
 const themeGrid = document.getElementById('theme-grid');
 themes.forEach((theme) => {
     let themeBtn = document.createElement('div');
     themeBtn.classList.add('theme-btn');
-    themeBtn.style.backgroundImage = `url(${chrome.runtime.getURL(theme.image)})`; // Arka plan resmi
+    themeBtn.style.backgroundImage = `url(${chrome.runtime.getURL(theme.image)})`; // BG Image
 
     let label = document.createElement('span');
     label.textContent = theme.name;
 
     themeBtn.appendChild(label);
-    themeGrid.appendChild(themeBtn); // Butonu tema ızgarasına ekle
+    themeGrid.appendChild(themeBtn);
 
-    // Butona tıklandığında temayı seç
     themeBtn.addEventListener('click', function() {
         selectedTheme = theme.image;
         document.querySelectorAll('.theme-btn').forEach(btn => {
@@ -78,20 +76,15 @@ themes.forEach((theme) => {
     });
 });
 
-// Apply butonuna basıldığında seçili temayı uygula
 document.getElementById('apply-button').addEventListener('click', function() {
     if (selectedTheme) {
-        // Seçilen temayı kaydet
         chrome.storage.sync.set({ selectedTheme: selectedTheme }, function() {
             console.log('Theme set to ' + selectedTheme);
 
-            // Aktif sekmeyi yenile
             chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
                 if (tabs.length > 0) {
-                    // Seçilen temayı aktif sekmeye gönder
                     chrome.tabs.sendMessage(tabs[0].id, { theme: selectedTheme });
 
-                    // Sayfayı yenile
                     chrome.tabs.reload(tabs[0].id);
                 } else {
                     console.error('No active tab found!');
